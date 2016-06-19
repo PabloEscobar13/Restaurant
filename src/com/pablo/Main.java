@@ -10,18 +10,18 @@ public class Main {
 
     public static void main(String[] args) {
 
-//        Dish dish1 = new PolishFood("Pierogi", 10.60);
-//        Dish dish2 = new PolishFood("Bigos", 11.20);
-//        Dish dish3 = new PolishFood("Schabowy", 16.00);
-//        Dish dish4 = new ItalianFood("Pizza", 12.50);
-//        Dish dish5 = new ItalianFood("Spaghetti", 13.90);
-//        Dish dish6 = new ItalianFood("Lazagne", 17.30);
-//        Dish dish7 = new MexicanFood("Buritto", 13.10);
-//        Dish dish8 = new MexicanFood("Tortilla", 11.70);
-//        Dish dish9 = new MexicanFood("Tortilla1", 14.10);
-//        Dish dish10 = new Drink("Mohiato", 11.00);
-//        Dish dish11 = new Drink("SexOnTheBeach", 14.60);
-//        Dish dish12 = new Drink("Vodka", 8.70);
+        Dish dish1 = new PolishFood("Pierogi", 10.60);
+        Dish dish2 = new PolishFood("Bigos", 11.20);
+        Dish dish3 = new PolishFood("Schabowy", 16.00);
+        Dish dish4 = new ItalianFood("Pizza", 12.50);
+        Dish dish5 = new ItalianFood("Spaghetti", 13.90);
+        Dish dish6 = new ItalianFood("Lazagne", 17.30);
+        Dish dish7 = new MexicanFood("Buritto", 13.10);
+        Dish dish8 = new MexicanFood("Tortilla", 11.70);
+        Dish dish9 = new MexicanFood("Tortilla1", 14.10);
+        Dish dish10 = new Drink("Mohiato", 11.00);
+        Dish dish11 = new Drink("SexOnTheBeach", 14.60);
+        Dish dish12 = new Drink("Vodka", 8.70);
 
         boolean somethingElse = false;
         ArrayList<Dish> orderList = new ArrayList<>(2);
@@ -32,7 +32,7 @@ public class Main {
 
         do {
             System.out.println("Would you like a lunch or a drink?");
-            System.out.println(Dish.getOffers());
+            System.out.println(Dish.getStringList(Dish.getOffers()));
             String meal = scan.next();
             switch (meal) {
 
@@ -42,37 +42,23 @@ public class Main {
                     System.out.println(Dish.getStringList(Dish.getCuisines()));
                     meal = scan.next();
                     switch (meal) {
-                        case "Polish":{
-                            Dish.askForOrder(PolishFood.getPolishDish());
+                        case "Polish": {
+                            Dish.askForOrder(Dish.dishToArray(PolishFood.getPolishFood()));
                             String order = scan.next();
-                            for (Dish d: PolishFood.getPolishDish()){
-                             if (d.getName().equals(order)){
-                                 orderList.add(d);
-                                 break;
-                             }
-                            }
-                            System.out.println("Anything else? ");
+                            Order.dishOrder(order, Dish.dishToArray(PolishFood.getPolishFood()));
+                            break;
                         }
-                        case "Mexico":{
-                            Dish.askForOrder(MexicanFood.getMexicanDish());
+                        case "Mexico": {
+                            Dish.askForOrder(Dish.dishToArray(MexicanFood.getMexicanFood()));
                             String order = scan.next();
-                            for (Dish d: MexicanFood.getMexicanDish()){
-                                if (d.getName().equals(order)){
-                                    orderList.add(d);
-                                    break;
-                                }
-                            }
-                            System.out.println("Anything else? ");
+                            Order.dishOrder(order, Dish.dishToArray(MexicanFood.getMexicanFood()));
+                            break;
                         }
-                        case "Italian":{
-                            Dish.askForOrder(ItalianFood.getItalianDish());
+                        case "Italian": {
+                            Dish.askForOrder(Dish.dishToArray(ItalianFood.getItalianFood()));
                             String order = scan.next();
-                            for (Dish d: ItalianFood.getItalianDish()){
-                                if (d.getName().equals(order)){
-                                    orderList.add(d);
-                                    break;
-                                }
-                            }
+                            Order.dishOrder(order, Dish.dishToArray(ItalianFood.getItalianFood()));
+                            break;
                         }
                     }
                 }/**Client order a lunch END**/
@@ -100,9 +86,10 @@ public class Main {
                     System.out.println("Sorry sir?");
                 }
             } while (check == -1);
-        }while (somethingElse) ;
+        } while (somethingElse);
 
         System.out.println(Arrays.toString(orderList.toArray()));
+
     }
 }
 
